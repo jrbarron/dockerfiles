@@ -8,7 +8,10 @@ RUN apt-get install -y \
   mesa-common-dev \
   libglu1-mesa-dev \
   subversion \
-  xutils-dev
+  xutils-dev \
+  git \
+  zip \
+  vim
 
 # Build everything here
 WORKDIR /opt
