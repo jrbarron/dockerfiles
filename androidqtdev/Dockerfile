@@ -75,6 +75,7 @@ RUN ./configure \
     -sysroot $SYSROOT \
     -openssl-linked \
     -no-strip \
+    -force-debug-info \
     -nomake tests -nomake examples \
     -android-sdk $ANDROID_HOME \
     -android-ndk $ANDROID_NDK_ROOT \
