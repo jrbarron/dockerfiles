@@ -86,6 +86,9 @@ RUN ./configure \
     -skip qttranslations -skip qtwebkit -skip qtserialport -skip qtwebkit-examples \
     -no-warnings-are-errors
 RUN make
+RUN make install
+
+ADD symbolize.py /opt/staging
 
 # TODO: generate symbol files for Qt
 
