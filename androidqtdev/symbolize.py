@@ -15,7 +15,7 @@ def symbolize(filename):
   symbolFile = open(symbolFilename, 'r')
   module = symbolFile.readline().split(" ")
   moduleId =  module[3]
-  moduleName = SYMBOLS_DIR + "/" + moduleId + "/" + module[4].strip()
+  moduleName = SYMBOLS_DIR + module[4].strip() + "/" + moduleId
 
   if not exists(moduleName):
     os.makedirs(moduleName)
