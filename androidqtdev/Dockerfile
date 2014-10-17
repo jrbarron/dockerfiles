@@ -88,7 +88,7 @@ RUN ./configure \
 RUN make
 RUN make install
 
-ADD symbolize.py /opt/staging
+ADD symbolize.py /usr/local/bin/symbolize.py
 
 # TODO: generate symbol files for Qt
 
