@@ -90,6 +90,9 @@ RUN make install
 
 ADD symbolize.py /usr/local/bin/symbolize.py
 
-# TODO: generate symbol files for Qt
+WORKDIR $SYSROOT/usr/local/Qt-5.3.2
+RUN symbolize.py ./lib
+RUN find . -name "*.so" | xargs arm-linux-androideabi-strip
 
-# TODO: Run strip on the binaries
+ENV PATH $PATH:/usr/local/Qt-5.3.2/bin
+
