@@ -10,7 +10,8 @@ from os.path import exists
 SYMBOLS_DIR = "/opt/symbols/"
 
 def symbolize(filename):
-  symbolFilename = SYMBOLS_DIR + filename + ".sym"
+  basename = os.path.basename(filename)
+  symbolFilename = SYMBOLS_DIR + basename + ".sym"
   os.system("dump_syms " + filename + " > " + symbolFilename)
   symbolFile = open(symbolFilename, 'r')
   module = symbolFile.readline().split(" ")
@@ -20,7 +21,7 @@ def symbolize(filename):
   if not exists(moduleName):
     os.makedirs(moduleName)
 
-  os.rename(symbolFilename, moduleName + "/" + filename + ".sym")
+  os.rename(symbolFilename, moduleName + "/" + basename + ".sym")
 
 
 if not exists(SYMBOLS_DIR):
