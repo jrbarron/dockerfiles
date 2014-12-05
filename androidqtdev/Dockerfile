@@ -29,7 +29,7 @@ ENV SYSROOT $ANDROID_NDK_ROOT/platforms/$ANDROID_API/$ANDROID_ARCH
 ENV ANDROID_DEV $SYSROOT/usr
 
 # Download google-breakpad
-RUN svn checkout http://google-breakpad.googlecode.com/svn/trunk/ google-breakpad
+RUN svn checkout http://google-breakpad.googlecode.com/svn/trunk/@1393 google-breakpad
 RUN mkdir google-breakpad-host
 RUN mkdir google-breakpad-target
 
@@ -66,9 +66,9 @@ RUN make install_sw
 
 # Download and build Qt
 WORKDIR ..
-RUN wget http://download.qt-project.org/official_releases/qt/5.3/5.3.2/single/qt-everywhere-opensource-src-5.3.2.tar.gz
-RUN tar xzvf qt-everywhere-opensource-src-5.3.2.tar.gz
-WORKDIR qt-everywhere-opensource-src-5.3.2
+RUN wget http://download.qt-project.org/development_releases/qt/5.4/5.4.0-rc/single/qt-everywhere-opensource-src-5.4.0-rc.tar.gz
+RUN tar xzvf qt-everywhere-opensource-src-5.4.0-rc.tar.gz
+WORKDIR qt-everywhere-opensource-src-5.4.0-rc
 ENV OPENSSL_LIBS "-L/opt/lib -lssl -lcrypto"
 RUN ./configure \
     -v \
@@ -93,9 +93,9 @@ RUN make install
 
 ADD symbolize.py /usr/local/bin/symbolize.py
 
-WORKDIR $SYSROOT/usr/local/Qt-5.3.2
+WORKDIR $SYSROOT/usr/local/Qt-5.4.0
 RUN symbolize.py ./lib
 RUN find . -name "*.so" | xargs arm-linux-androideabi-strip
 
-ENV PATH $PATH:/usr/local/Qt-5.3.2/bin
+ENV PATH $PATH:/usr/local/Qt-5.4.0/bin
 
