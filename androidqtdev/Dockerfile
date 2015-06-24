@@ -55,7 +55,7 @@ RUN make install
 
 # Download and build OpenSSL for Android
 WORKDIR ..
-RUN wget http://www.openssl.org/source/openssl-1.0.1i.tar.gz --nv
+RUN wget http://www.openssl.org/source/openssl-1.0.1i.tar.gz -nv
 RUN tar xzf openssl-1.0.1i.tar.gz
 ENV CROSS_COMPILE arm-linux-androideabi-
 WORKDIR openssl-1.0.1i
@@ -64,9 +64,8 @@ RUN make depend
 RUN make all
 RUN make install_sw
 
-# Download and build Qt
 WORKDIR ..
-RUN wget http://download.qt.io/official_releases/qt/5.4/5.4.2/single/qt-everywhere-opensource-src-5.4.2.tar.gz --nv
+RUN wget http://download.qt.io/official_releases/qt/5.4/5.4.2/single/qt-everywhere-opensource-src-5.4.2.tar.gz -nv
 RUN tar xzf qt-everywhere-opensource-src-5.4.2.tar.gz
 WORKDIR qt-everywhere-opensource-src-5.4.2
 ENV OPENSSL_LIBS "-L/opt/lib -lssl -lcrypto"
