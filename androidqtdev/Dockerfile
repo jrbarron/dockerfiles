@@ -78,8 +78,9 @@ RUN ./configure \
     -sysroot $SYSROOT \
     -openssl-linked \
     -no-strip \
+    -no-widgets \
     -force-debug-info \
-    -nomake tests -nomake examples \
+    -nomake tests -nomake examples -nomake tools \
     -android-sdk $ANDROID_HOME \
     -android-ndk $ANDROID_NDK_ROOT \
     -android-arch armeabi-v7a \
