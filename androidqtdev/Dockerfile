@@ -66,9 +66,9 @@ RUN make install_sw
 
 # Download and build Qt
 WORKDIR ..
-RUN wget http://download.qt-project.org/development_releases/qt/5.4/5.4.0-rc/single/qt-everywhere-opensource-src-5.4.0-rc.tar.gz
-RUN tar xzvf qt-everywhere-opensource-src-5.4.0-rc.tar.gz
-WORKDIR qt-everywhere-opensource-src-5.4.0-rc
+RUN wget http://download.qt.io/official_releases/qt/5.4/5.4.2/single/qt-everywhere-opensource-src-5.4.2.tar.gz --nv
+RUN tar xzf qt-everywhere-opensource-src-5.4.2.tar.gz
+WORKDIR qt-everywhere-opensource-src-5.4.2
 ENV OPENSSL_LIBS "-L/opt/lib -lssl -lcrypto"
 RUN ./configure \
     -v \
