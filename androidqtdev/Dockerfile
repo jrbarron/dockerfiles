@@ -42,7 +42,7 @@ RUN make install
 # Build target library for Android
 WORKDIR ../google-breakpad-target
 RUN ../google-breakpad/configure --host=arm-linux-androideabi \
-  --prefix=/opt \
+  --prefix=$SYSROOT \
   --disable-processor \
   --disable-tools \
   CC="arm-linux-androideabi-gcc --sysroot=$SYSROOT" \
@@ -59,7 +59,7 @@ RUN wget http://www.openssl.org/source/openssl-1.0.1i.tar.gz -nv
 RUN tar xzf openssl-1.0.1i.tar.gz
 ENV CROSS_COMPILE arm-linux-androideabi-
 WORKDIR openssl-1.0.1i
-RUN ./Configure shared android-armv7 -no-ssl2 -no-ssl3 -no-comp -no-hw -no-engine --openssldir=/opt
+RUN ./Configure shared android-armv7 -no-ssl2 -no-ssl3 -no-comp -no-hw -no-engine --openssldir=$SYSROOT
 RUN make depend
 RUN make all
 RUN make install_sw
@@ -68,14 +68,13 @@ WORKDIR ..
 RUN wget http://download.qt.io/official_releases/qt/5.4/5.4.2/single/qt-everywhere-opensource-src-5.4.2.tar.gz -nv
 RUN tar xzf qt-everywhere-opensource-src-5.4.2.tar.gz
 WORKDIR qt-everywhere-opensource-src-5.4.2
-ENV OPENSSL_LIBS "-L/opt/lib -lssl -lcrypto"
+ENV OPENSSL_LIBS "-L$SYSROOT/lib -lssl -lcrypto"
 RUN ./configure \
     -v \
     -opensource \
     -confirm-license \
     -xplatform android-g++ \
     -sysroot $SYSROOT \
-    -I/opt/include \
     -openssl-linked \
     -no-strip \
     -no-widgets \
