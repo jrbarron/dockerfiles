@@ -42,7 +42,7 @@ RUN make install
 # Build target library for Android
 WORKDIR ../google-breakpad-target
 RUN ../google-breakpad/configure --host=arm-linux-androideabi \
-  --prefix=$SYSROOT \
+  --prefix=$SYSROOT/usr \
   --disable-processor \
   --disable-tools \
   CC="arm-linux-androideabi-gcc --sysroot=$SYSROOT" \
@@ -59,7 +59,7 @@ RUN wget http://www.openssl.org/source/openssl-1.0.1i.tar.gz -nv
 RUN tar xzf openssl-1.0.1i.tar.gz
 ENV CROSS_COMPILE arm-linux-androideabi-
 WORKDIR openssl-1.0.1i
-RUN ./Configure shared android-armv7 -no-ssl2 -no-ssl3 -no-comp -no-hw -no-engine --openssldir=$SYSROOT
+RUN ./Configure shared android-armv7 -no-ssl2 -no-ssl3 -no-comp -no-hw -no-engine --openssldir=$SYSROOT/usr
 RUN make depend
 RUN make all
 RUN make install_sw
