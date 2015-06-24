@@ -29,7 +29,7 @@ ENV SYSROOT $ANDROID_NDK_ROOT/platforms/$ANDROID_API/$ANDROID_ARCH
 ENV ANDROID_DEV $SYSROOT/usr
 
 # Download google-breakpad
-RUN svn checkout http://google-breakpad.googlecode.com/svn/trunk/@1393 google-breakpad
+RUN svn checkout --quiet http://google-breakpad.googlecode.com/svn/trunk/@1393 google-breakpad
 RUN mkdir google-breakpad-host
 RUN mkdir google-breakpad-target
 
@@ -55,8 +55,8 @@ RUN make install
 
 # Download and build OpenSSL for Android
 WORKDIR ..
-RUN wget http://www.openssl.org/source/openssl-1.0.1i.tar.gz
-RUN tar xzvf openssl-1.0.1i.tar.gz
+RUN wget http://www.openssl.org/source/openssl-1.0.1i.tar.gz --nv
+RUN tar xzf openssl-1.0.1i.tar.gz
 ENV CROSS_COMPILE arm-linux-androideabi-
 WORKDIR openssl-1.0.1i
 RUN ./Configure shared android-armv7 -no-ssl2 -no-ssl3 -no-comp -no-hw -no-engine --openssldir=/opt
