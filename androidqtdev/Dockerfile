@@ -75,6 +75,7 @@ RUN ./configure \
     -confirm-license \
     -xplatform android-g++ \
     -sysroot $SYSROOT \
+    -I/opt/include \
     -openssl-linked \
     -no-strip \
     -no-widgets \
