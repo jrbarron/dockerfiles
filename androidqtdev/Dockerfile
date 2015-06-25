@@ -87,7 +87,7 @@ RUN ./configure \
     -android-arch armeabi-v7a \
     -android-ndk-host linux-x86_64 \
     -android-toolchain-version 4.8 \
-    -android-ndk-platform 19 \
+    -android-ndk-platform $ANDROID_API \
     -skip qttranslations -skip qtwebkit -skip qtserialport -skip qtwebkit-examples \
     -skip qtxmlpatterns -skip qtsvg -skip qtenginio -skip qtscript \
     -no-warnings-are-errors
