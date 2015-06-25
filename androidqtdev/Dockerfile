@@ -68,9 +68,10 @@ WORKDIR ..
 RUN wget http://download.qt.io/official_releases/qt/5.4/5.4.2/single/qt-everywhere-opensource-src-5.4.2.tar.gz -nv
 RUN tar xzf qt-everywhere-opensource-src-5.4.2.tar.gz
 WORKDIR qt-everywhere-opensource-src-5.4.2
-ENV OPENSSL_LIBS "-L$SYSROOT/lib -lssl -lcrypto"
+ENV OPENSSL_LIBS "-L$SYSROOT/usr/lib -lssl -lcrypto"
 RUN ./configure \
     -v \
+    -prefix /usr \
     -opensource \
     -confirm-license \
     -xplatform android-g++ \
@@ -93,9 +94,12 @@ RUN make install
 
 ADD symbolize.py /usr/local/bin/symbolize.py
 
-WORKDIR $SYSROOT/usr/local/Qt-5.4.0
+WORKDIR $SYSROOT/usr/Qt-5.4.0
 RUN symbolize.py ./lib
 RUN find . -name "*.so" | xargs arm-linux-androideabi-strip
 
-ENV PATH $PATH:/usr/local/Qt-5.4.0/bin
+ENV PATH $PATH:/usr/Qt-5.4.0/bin
+
+RUN rm -rf /opt/staging
+
 
