@@ -77,6 +77,7 @@ RUN ./configure \
     -xplatform android-g++ \
     -sysroot $SYSROOT \
     -openssl-linked \
+    -no-dbus \
     -no-strip \
     -no-widgets \
     -force-debug-info \
@@ -88,6 +89,7 @@ RUN ./configure \
     -android-toolchain-version 4.8 \
     -android-ndk-platform 19 \
     -skip qttranslations -skip qtwebkit -skip qtserialport -skip qtwebkit-examples \
+    -skip qtxmlpatterns -skip qtsvg -skip qtenginio -skip qtscript \
     -no-warnings-are-errors
 RUN make
 RUN make install
