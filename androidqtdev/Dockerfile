@@ -96,11 +96,9 @@ RUN make install
 
 ADD symbolize.py /usr/local/bin/symbolize.py
 
-WORKDIR $SYSROOT/usr/Qt-5.4.0
+WORKDIR $SYSROOT/usr/
 RUN symbolize.py ./lib
 RUN find . -name "*.so" | xargs arm-linux-androideabi-strip
-
-ENV PATH $PATH:/usr/Qt-5.4.0/bin
 
 RUN rm -rf /opt/staging
 

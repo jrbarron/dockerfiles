@@ -32,7 +32,7 @@ if len(sys.argv) > 1:
   if (isfile(target)):
       symbolize(target)
   else:
-    for filename in glob.glob(target + '/*.so'):
+    for filename in glob.glob(target + '/libQt5*.so'):
       symbolize(filename)
 else:
   for filename in glob.glob('*.so'):
